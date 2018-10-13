@@ -182,9 +182,67 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 
 
 
+
+//
+//struct MeshData
+//{
+//	std::string MeshName;
+//	float PositionX, PositionY, PositionZ;
+//	float RotationX, RotationY, RotationZ;
+//	float ScaleX, ScaleY, ScaleZ;
+//	float ColorX, ColorY, ColorZ;
+//
+//};
+//
+//void LoadMeshFile(const std::string &filename, std::map<std::string, cMeshObject*> &meshes)
+//{
+//
+//	std::ifstream theFile(filename.c_str());
+//	if (!theFile.is_open())
+//	{
+//		//return false;
+//	}
+//
+//	std::vector<MeshData> meshDatas;
+//
+//	while (true)
+//	{
+//		MeshData meshData;
+//		theFile >> meshData.MeshName;
+//		theFile >> meshData.PositionX >> meshData.PositionY >> meshData.PositionZ;
+//		theFile >> meshData.RotationX >> meshData.RotationY >> meshData.RotationZ;
+//		theFile >> meshData.ScaleX >> meshData.ScaleY >> meshData.ScaleZ;
+//		theFile >> meshData.ColorX >> meshData.ColorY >> meshData.ColorZ;
+//
+//		meshDatas.push_back(meshData);
+//
+//		if (theFile.eof()) break;
+//	}
+//
+//	for (unsigned int x = 0; x < meshDatas.size(); x++)
+//	{
+//		// don't use auto
+//		auto myMeshIterator = meshes.find(meshDatas[x].MeshName);
+//		if (myMeshIterator == meshes.end()) continue;
+//
+//		cMeshObject *currentMesh = myMeshIterator.second;
+//		MeshData myMeshData = meshDatas[x];
+//		// set data to current mesh from myMeshData
+//	}
+//
+//}
+
+
+//TXT OUTPUT LOOKS LIKE THIS
+//Mesh_Name Utah_Teapot_xyz_n.ply
+//Position - 150 60 0
+//Rotation - 0.349066 0 0
+//Scale 0.1 0.1 0.1
+//Colour  0.2 0.8 0.3
+
 void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	filename = "output/" + filename;
-	cMeshObject* model1 = models.at(0);
+	//cMeshObject* model1 = models.at(0);
 
 	std::ifstream f(filename.c_str());
 	if (!f.is_open()) {
@@ -192,56 +250,103 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	}
 	std::string nextData;
 
-	while (f >> nextData) {
-		if (nextData == "Mesh_Name") 
-		{
-			break; 
-		};
+
+	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+	{
+		cMeshObject* CurModel = *it;
+		while (f >> nextData) {
+			if (nextData == "Mesh_Name")
+			{
+				break;
+			};
+		}
+
+		if (f.eof()) {
+			std::cout << "error" << std::endl;//error
+		}
+		f >> nextData;
+															//f >> CurModel->meshName; // TODO verify that this string does not include '\n' character
+		if (nextData == CurModel->meshName) {
+			std::cout << CurModel->meshName << std::endl;
+
+			while (f >> nextData) {
+				if (nextData == "Position")
+				{
+					break;
+				};
+			}
+
+			if (f.eof()) {
+				//error
+			}
+
+			f >> CurModel->position.x;
+			f >> CurModel->position.y;
+			f >> CurModel->position.z;
+
+			std::cout << CurModel->position.x << std::endl;
+			std::cout << CurModel->position.y << std::endl;
+			std::cout << CurModel->position.z << std::endl;
+
+			while (f >> nextData) {
+				if (nextData == "Rotation")
+				{
+					break;
+				};
+			}
+			if (f.eof()) {
+				//error
+			}
+
+			f >> CurModel->postRotation.x;
+			f >> CurModel->postRotation.y;
+			f >> CurModel->postRotation.z;
+
+			std::cout << CurModel->postRotation.x << std::endl;
+			std::cout << CurModel->postRotation.y << std::endl;
+			std::cout << CurModel->postRotation.z << std::endl;
+
+
+			//Searching for Scale
+			while (f >> nextData) {
+				if (nextData == "Scale")
+				{
+					break;
+				};
+			}
+			if (f.eof()) {
+				//error
+			}
+
+			f >> CurModel->nonUniformScale.x;
+			f >> CurModel->nonUniformScale.y;
+			f >> CurModel->nonUniformScale.z;
+
+			std::cout << CurModel->nonUniformScale.x << std::endl;
+			std::cout << CurModel->nonUniformScale.y << std::endl;
+			std::cout << CurModel->nonUniformScale.z << std::endl;
+		}
+
+			while (f >> nextData) {
+				if (nextData == "Colour")
+				{
+					break;
+				};
+			}
+			if (f.eof()) {
+				//error
+			}
+
+			f >> CurModel->objColour.x;
+			f >> CurModel->objColour.y;
+			f >> CurModel->objColour.z;
+
+			std::cout << CurModel->objColour.x << std::endl;
+			std::cout << CurModel->objColour.y << std::endl;
+			std::cout << CurModel->objColour.z << std::endl;
+
+
 	}
-	if (f.eof()) {
-		std::cout << "error"<< std::endl;//error
-	}
-	
-	//f >> model1->meshName; // TODO verify that this string does not include '\n' character
-	std::cout << model1->meshName <<std::endl;
-
-	while (f >> nextData) {
-		if (nextData == "Position")
-		{ 
-			break; 
-		};
-	}
-
-	if (f.eof()) {
-		//error
-	}
-
-	f >> model1->position.x;
-	f >> model1->position.y;
-	f >> model1->position.z;
-
-	std::cout << model1->position.x << std::endl;
-	std::cout << model1->position.y << std::endl;
-	std::cout << model1->position.z << std::endl;
-
-	while (f >> nextData) {
-		if (nextData == "Rotation")
-		{
-			break;
-		};
-	}
-	if (f.eof()) {
-		//error
-	}
-
-	f >> model1->postRotation.x;
-	f >> model1->postRotation.y;
-	f >> model1->postRotation.z;
-
-	std::cout << model1->postRotation.x << std::endl;
-	std::cout << model1->postRotation.y << std::endl;
-	std::cout << model1->postRotation.z << std::endl;
-
 }
 
 

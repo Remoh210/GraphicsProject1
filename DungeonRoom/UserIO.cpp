@@ -4,6 +4,7 @@
 //#include <vector>
 #include <iostream>
 
+int index = 0;
 // This has all the keyboard, mouse, and controller stuff
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -54,6 +55,21 @@ void key_callback( GLFWwindow* window,
 	}
 	
 
+
+
+	//Chose the model
+	if (key == GLFW_KEY_N && action == GLFW_PRESS)
+	{
+		if (index < (vec_pObjectsToDraw.size() - 1)) {
+			
+			index = index + 1;
+		}
+		else { index = 0; }
+		std::cout << "Model " << vec_pObjectsToDraw.at(index)->meshName << "is Chosen" << std::endl;
+	}
+
+
+
 	//Switcth The Light
 
 	if (key == GLFW_KEY_9 && action == GLFW_PRESS)
@@ -64,7 +80,6 @@ void key_callback( GLFWwindow* window,
 	{
 		LightManager->vecLights.at(lightIndex)->param2.x = 0.0f;
 	}
-
 
 
 	//Change Colour of the light
@@ -293,15 +308,19 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 	if ( IsAltDown(window) )
-	{
+	{	//Chose the Model
+		if (glfwGetKey(window, GLFW_KEY_N)) 
+		{
 
 
-		if ( glfwGetKey( window, GLFW_KEY_W ) )	{		}
-		if ( glfwGetKey( window, GLFW_KEY_S ) )	{		}
-		if ( glfwGetKey( window, GLFW_KEY_A ) )	{		}
-		if ( glfwGetKey( window, GLFW_KEY_D ) ) {		}
-		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{		}
-		if ( glfwGetKey( window, GLFW_KEY_E ) )	{		}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_W)) { vec_pObjectsToDraw.at(index)->position.z += cameraSpeed; }
+		if ( glfwGetKey( window, GLFW_KEY_S ) )	{ vec_pObjectsToDraw.at(index)->position.z -= cameraSpeed; }
+		if ( glfwGetKey( window, GLFW_KEY_A ) )	{ vec_pObjectsToDraw.at(index)->position.x += cameraSpeed; }
+		if ( glfwGetKey( window, GLFW_KEY_D ) ) { vec_pObjectsToDraw.at(index)->position.x -= cameraSpeed; }
+		if ( glfwGetKey( window, GLFW_KEY_Q ) )	{ vec_pObjectsToDraw.at(index)->position.y += cameraSpeed; }
+		if ( glfwGetKey( window, GLFW_KEY_E ) )	{ vec_pObjectsToDraw.at(index)->position.y -= cameraSpeed; }
 
 	}
 	

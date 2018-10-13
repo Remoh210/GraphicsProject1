@@ -1,17 +1,17 @@
 Mesh_Name Utah_Teapot_xyz_n.ply
-Position -1 2 3
+Position -150 60 0
 Rotation -0.349066 0 0
-Scale  0.4 0.4 0.4
+Scale 1 1 1
 Colour  0.2 0.8 0.3
 Mesh_Name skull.ply
 Position 0 50 0
 Rotation 0 -0.349066 0
-Scale  1.5 1.5 1.5
+Scale  3 3 3
 Colour  1 1 1
 Mesh_Name spider.ply
 Position 80 50 0
 Rotation 0 0 0
-Scale  0.2 0.2 0.2
+Scale  2 2 2
 Colour  0.24 0.56 1
 Mesh_Name room.ply
 Position 0 0 300
