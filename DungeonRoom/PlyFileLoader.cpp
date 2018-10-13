@@ -131,26 +131,44 @@ void saveLightInfo(std::string filename, std::vector<sLight*> lights)
 }
 
 
-void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
+void LoadLightInfo(std::string filename, std::vector<sLight*> lights)
 {
 	filename = "output/" + filename;
 	std::string line;
 	std::ofstream file(filename.c_str());
 	if (file.is_open())
 	{
-		for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+		for (std::vector<sLight*>::iterator it = lights.begin(); it != lights.end(); ++it)
 		{
-			cMeshObject* CurModel = *it;
-			file << "Mesh_Name: " << CurModel->meshName; "\n";
-			file << "Position_xyz: " << CurModel->position.x << " , " << CurModel->position.y << " , " << CurModel->position.z << "\n";
-			//file << "Attenuation_xyz: " << CurModel->atten.x << " " << CurModel->atten.y << " " << CurModel->atten.z << "\n";
-			//file << "Diffuse_rgbw: " << CurModel->diffuse.x << " " << CurModel->diffuse.y << " " << CurModel->diffuse.z << " " << CurModel->diffuse.w << "\n";
-			//file << "on_off: " << CurModel->param2.x << "\n";
+			sLight* CurLight = *it;
+			file << "Position_xyz: " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
+			file << "Attenuation_xyz: " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
+			file << "Diffuse_rgbw: " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
+			file << "on_off: " << CurLight->param2.x << "\n";
 			//pTheOneLight->AtenSphere = false;
 			//LightManager->vecLights.push_back(pTheOneLight);
 			//LightManager->LoadUniformLocations(program);
 		}
-		std::cout << "Models information saved to " << filename.c_str() << std::endl;
+		std::cout << "Lights information saved to " << filename.c_str() << std::endl;
 		file.close();
+	}
+}
+
+
+void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
+{
+	filename = "output/" + filename;
+	std::string line;
+	std::ifstream file(filename.c_str());
+	if (file.is_open())
+	{
+		std::string nextData;
+		while (file >> nextData)
+		{
+			if (nextData == "Position_xyz: ")
+			{
+				break;		// exit while loop...
+			}
+		};
 	}
 }

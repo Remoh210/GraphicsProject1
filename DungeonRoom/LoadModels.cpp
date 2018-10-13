@@ -27,6 +27,11 @@ void LoadModelTypes( cVAOMeshManager* pTheVAOMeshManager, GLuint shaderProgramID
 	terrainInfo.bVertexBufferIsDynamic = true;
 	pTheVAOMeshManager->LoadModelIntoVAO(terrainInfo, shaderProgramID);
 	
+	sModelDrawInfo bluntInfo;
+	bluntInfo.meshFileName = "blunt.ply";	// "MeshLab_Fractal_Terrain_xyz.ply";
+	// Will alow me to update the vertex data in the mesh
+	bluntInfo.bVertexBufferIsDynamic = true;
+	pTheVAOMeshManager->LoadModelIntoVAO(bluntInfo, shaderProgramID);
 
 	sModelDrawInfo sphereInfo;
 	sphereInfo.meshFileName = "Sphere_320_faces_xyz_n.ply";			// "Sphere_320_faces_xyz.ply";
@@ -103,6 +108,16 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 		vec_pObjectsToDraw.push_back(pRoom);
 	}
 
+	{
+		cMeshObject* pBlunt = new cMeshObject();
+		pBlunt->position = glm::vec3(0.0f, 0.0f, 300.0f);
+		pBlunt->postRotation = glm::vec3(0.0f, glm::radians(-40.0f), 0.0f);
+		pBlunt->objColour = glm::vec3(0.74f, 0.86f, 1.0f);
+		pBlunt->meshName = "blunt.ply";
+		pBlunt->setUniformScale(1.0f);
+		pBlunt->bIsVisible = true;
+		vec_pObjectsToDraw.push_back(pBlunt);
+	}
 
 	{
 		cMeshObject* pTable = new cMeshObject();
