@@ -66,9 +66,9 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 
 	{
 		cMeshObject* pTeapot = new cMeshObject();
-		pTeapot->position = glm::vec3( -80.0f, 60.0f, 0.0f );
+		pTeapot->position = glm::vec3( -90.0f, 60.0f, 0.0f );
 		pTeapot->objColour = glm::vec3( 0.2f, 0.8f, 0.3f );
-		pTeapot->postRotation = glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f);
+		pTeapot->postRotation = glm::vec3(glm::radians(-20.0f), 0.0f, 0.0f);
 		pTeapot->meshName = "Utah_Teapot_xyz_n.ply";		
 		pTeapot->setUniformScale( 0.4f );
 		vec_pObjectsToDraw.push_back( pTeapot );

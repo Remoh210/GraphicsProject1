@@ -165,11 +165,11 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 		for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
 		{
 			cMeshObject* CurModel = *it;
-			file << "Mesh_Name: " << CurModel->meshName << "\n";
-			file << "Position: " << CurModel->position.x << " " << CurModel->position.y << " " << CurModel->position.z << "\n";
-			file << "Rotation: " << CurModel->postRotation.x << " " << CurModel->postRotation.y << " " << CurModel->postRotation.z << "\n";
-			file << "Scale:  " << CurModel->nonUniformScale.x << " " << CurModel->nonUniformScale.y << " " << CurModel->nonUniformScale.z << "\n";
-			file << "Colour:  " << CurModel->objColour.x << " " << CurModel->objColour.y << " " << CurModel->objColour.z << "\n";
+			file << "Mesh_Name " << CurModel->meshName << "\n";
+			file << "Position " << CurModel->position.x << " " << CurModel->position.y << " " << CurModel->position.z << "\n";
+			file << "Rotation " << CurModel->postRotation.x << " " << CurModel->postRotation.y << " " << CurModel->postRotation.z << "\n";
+			file << "Scale  " << CurModel->nonUniformScale.x << " " << CurModel->nonUniformScale.y << " " << CurModel->nonUniformScale.z << "\n";
+			file << "Colour  " << CurModel->objColour.x << " " << CurModel->objColour.y << " " << CurModel->objColour.z << "\n";
 			//pTeapot->meshName = "Utah_Teapot_xyz_n.ply";
 			//pTeapot->setUniformScale(0.4f);
 		}
@@ -193,7 +193,7 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::string nextData;
 
 	while (f >> nextData) {
-		if (nextData == "Mesh_Name: ") break;
+		if (nextData == "Mesh_Name") break;
 	}
 	if (f.eof()) {
 		std::cout << "error"<< std::endl;//error
@@ -203,7 +203,7 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::cout << model1->meshName <<std::endl;
 
 	while (f >> nextData) {
-		if (nextData != "Position: ") break;
+		if (nextData != "Position") break;
 	}
 
 	if (f.eof()) {
@@ -219,7 +219,7 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::cout << model1->position.z << std::endl;
 
 	while (f >> nextData) {
-		if (nextData == "Rotation: ") break;
+		if (nextData == "Rotation") break;
 	}
 	if (f.eof()) {
 		//error
