@@ -167,6 +167,11 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 			cMeshObject* CurModel = *it;
 			file << "Mesh_Name: " << CurModel->meshName << "\n";
 			file << "Position: " << CurModel->position.x << " " << CurModel->position.y << " " << CurModel->position.z << "\n";
+			file << "Rotation: " << CurModel->postRotation.x << " " << CurModel->postRotation.y << " " << CurModel->postRotation.z << "\n";
+			file << "Scale:  " << CurModel->nonUniformScale.x << " " << CurModel->nonUniformScale.y << " " << CurModel->nonUniformScale.z << "\n";
+			file << "Colour:  " << CurModel->objColour.x << " " << CurModel->objColour.y << " " << CurModel->objColour.z << "\n";
+			//pTeapot->meshName = "Utah_Teapot_xyz_n.ply";
+			//pTeapot->setUniformScale(0.4f);
 		}
 		std::cout << "Models information saved to " << filename.c_str() << std::endl;
 		file.close();
