@@ -193,7 +193,10 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::string nextData;
 
 	while (f >> nextData) {
-		if (nextData == "Mesh_Name") break;
+		if (nextData == "Mesh_Name") 
+		{
+			break; 
+		};
 	}
 	if (f.eof()) {
 		std::cout << "error"<< std::endl;//error
@@ -203,7 +206,10 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::cout << model1->meshName <<std::endl;
 
 	while (f >> nextData) {
-		if (nextData != "Position") break;
+		if (nextData == "Position")
+		{ 
+			break; 
+		};
 	}
 
 	if (f.eof()) {
@@ -219,7 +225,10 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	std::cout << model1->position.z << std::endl;
 
 	while (f >> nextData) {
-		if (nextData == "Rotation") break;
+		if (nextData == "Rotation")
+		{
+			break;
+		};
 	}
 	if (f.eof()) {
 		//error
