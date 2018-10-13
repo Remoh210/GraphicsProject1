@@ -1,0 +1,7 @@
+Mesh_Name: Utah_Teapot_xyz_n.plyPosition_xyz: -80 , 60 , 0
+Mesh_Name: skull.plyPosition_xyz: 0 , 50 , 0
+Mesh_Name: spider.plyPosition_xyz: 80 , 50 , 0
+Mesh_Name: room.plyPosition_xyz: 0 , 0 , 300
+Mesh_Name: table.plyPosition_xyz: 0 , 0 , 0
+Mesh_Name: MeshLab_Fractal_Terrain_xyz_n.plyPosition_xyz: 0 , -10 , 0
+Mesh_Name: Sphere_320_faces_xyz_n.plyPosition_xyz: 0 , 0 , 0
