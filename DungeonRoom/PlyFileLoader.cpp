@@ -154,8 +154,27 @@ void LoadLightInfo(std::string filename, std::vector<sLight*> lights)
 	}
 }
 
-
+//Save Models Info to the file
 void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
+{
+	filename = "output/" + filename;
+	std::string line;
+	std::ofstream file(filename.c_str());
+	if (file.is_open())
+	{
+		for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+		{
+			cMeshObject* CurModel = *it;
+			file << "Mesh_Name: " << CurModel->meshName << "\n";
+			file << "Position: " << CurModel->position.x << " " << CurModel->position.y << " " << CurModel->position.z << "\n";
+		}
+		std::cout << "Models information saved to " << filename.c_str() << std::endl;
+		file.close();
+	}
+}
+
+//Load models Info from the file
+void LoadModelInfo(std::string filename, std::vector<cMeshObject*> models)
 {
 	filename = "output/" + filename;
 	std::string line;
@@ -165,7 +184,7 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 		std::string nextData;
 		while (file >> nextData)
 		{
-			if (nextData == "Position_xyz: ")
+			if (nextData == "Position: ")
 			{
 				break;		// exit while loop...
 			}
