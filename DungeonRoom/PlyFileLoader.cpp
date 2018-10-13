@@ -179,20 +179,72 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 }
 
 //Load models Info from the file
-void LoadModelInfo(std::string filename, std::vector<cMeshObject*> models)
-{
+
+
+
+void loadModels(std::string filename, std::vector<cMeshObject*> models) {
 	filename = "output/" + filename;
-	std::string line;
-	std::ifstream file(filename.c_str());
-	if (file.is_open())
-	{
-		std::string nextData;
-		while (file >> nextData)
-		{
-			if (nextData == "Position: ")
-			{
-				break;		// exit while loop...
-			}
-		};
+	cMeshObject* model1 = models.at(0);
+
+	std::ifstream f(filename.c_str());
+	if (!f.is_open()) {
+		//error
 	}
+	std::string nextData;
+
+	while (f >> nextData) {
+		if (nextData == "Mesh_Name:") break;
+	}
+	if (f.eof()) {
+		std::cout << "error"<< std::endl;//error
+	}
+	
+	//f >> model1->meshName; // TODO verify that this string does not include '\n' character
+	std::cout << model1->meshName <<std::endl;
+
+	while (f >> nextData) {
+		if (nextData != "Position:") break;
+	}
+
+	if (f.eof()) {
+		//error
+	}
+
+	f >> model1->position.x;
+	f >> model1->position.y;
+	f >> model1->position.z;
+
+	std::cout << model1->position.x << std::endl;
+	std::cout << model1->position.y << std::endl;
+	std::cout << model1->position.z << std::endl;
+
+	while (f >> nextData) {
+		if (nextData == "Rotation:") break;
+	}
+	if (f.eof()) {
+		//error
+	}
+
+	f >> model1->postRotation.x;
+	f >> model1->postRotation.y;
+	f >> model1->postRotation.z;
+
+	std::cout << model1->postRotation.x << std::endl;
+	std::cout << model1->postRotation.y << std::endl;
+	std::cout << model1->postRotation.z << std::endl;
+
+	f.close();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

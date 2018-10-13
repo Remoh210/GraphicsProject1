@@ -31,7 +31,7 @@ extern glm::vec3 Horizontal;
 extern float pitch;
 extern float yaw;
 
-extern std::vector<cMeshObject*> vec_pObjectsToDraw;
+//extern std::vector<cMeshObject*> vec_pObjectsToDraw;
 
 extern glm::vec3 g_CameraEye;	// = glm::vec3( 0.0, 0.0, +10.0f );
 //extern glm::vec3 g_CameraAt;	// = glm::vec3( 0.0, 0.0, 0.0f );
@@ -45,7 +45,7 @@ extern glm::vec3 g_lightPos;	// = glm::vec3( 4.0f, 4.0f, 0.0f );
 extern float g_lightBrightness;	// = 1.0f;
 
 extern cVAOMeshManager* g_pTheVAOMeshManager;
-
+extern std::vector< cMeshObject* > vec_pObjectsToDraw;
 
 // 
 // This is a global pointer to a mesh object. 
@@ -68,6 +68,8 @@ cMeshObject* findObjectByUniqueID( unsigned int IDToFind );
 void saveLightInfo(std::string filename, std::vector<sLight*> lights);
 
 void saveModelInfo(std::string filename, std::vector<cMeshObject*> models);
+
+void loadModels(std::string filename, std::vector<cMeshObject*> models);
 
 void DrawObject( cMeshObject* pCurrentMesh,
 				 glm::mat4x4 &matModel, 

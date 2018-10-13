@@ -48,6 +48,10 @@ void key_callback( GLFWwindow* window,
 	{
 		saveModelInfo("Models.txt", vec_pObjectsToDraw);
 	}
+	if (key == GLFW_KEY_H && action == GLFW_PRESS)
+	{
+		loadModels("Models.txt", vec_pObjectsToDraw);
+	}
 	
 
 	//Switcth The Light
