@@ -17,12 +17,18 @@ extern cLightManager* LightManager;
 int lightIndex = 0;
 bool firstMouse;
 
+cMeshObject* closedModel;
+
+bool IsPicked = false;
+cMeshObject* CloseToObj(std::vector<cMeshObject*> models);
+
 void key_callback( GLFWwindow* window, 
 						  int key, 
 						  int scancode, 
 						  int action, 
 						  int mods)
 {
+	
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
         glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -31,20 +37,14 @@ void key_callback( GLFWwindow* window,
 	// CHOOSE THE LIGHT
 	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 	{
-		lightIndex = 0;
+		if (IsPicked == false) 
+		{
+			closedModel = CloseToObj(vec_pObjectsToDraw);
+			closedModel->position = cameraFront;//glm::distance(Front, V)
+			IsPicked == true;
+		}
 	}
-	if (key == GLFW_KEY_2 && action == GLFW_PRESS)
-	{
-		lightIndex = 1;
-	}
-	if (key == GLFW_KEY_3 && action == GLFW_PRESS)
-	{
-		lightIndex = 2;
-	}
-	if (key == GLFW_KEY_4 && action == GLFW_PRESS)
-	{
-		lightIndex = 3;
-	}
+
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
 		saveModelInfo("Models.txt", vec_pObjectsToDraw);
@@ -325,4 +325,21 @@ void ProcessAsynKeys(GLFWwindow* window)
 	}
 	
 	return;
+}
+
+
+
+cMeshObject* CloseToObj(std::vector<cMeshObject*> models)
+{
+	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+	{
+		cMeshObject* CurModel = *it;
+		if (glm::distance(CurModel->position, Front) < 10.0f)
+		{
+			return CurModel;
+		}
+		//pTeapot->meshName = "Utah_Teapot_xyz_n.ply";
+		//pTeapot->setUniformScale(0.4f);
+	}
+	//return false;
 }
