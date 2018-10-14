@@ -245,8 +245,8 @@ int main(void)
 	cLightHelper* pLightHelper = new cLightHelper();
 
 	
-
-
+	//Reload from the file
+	loadModels("Models.txt", vec_pObjectsToDraw);
 	//*****************************************************************
 	
 	// Draw the "scene" (run the program)
@@ -258,14 +258,12 @@ int main(void)
 
         float ratio;
         int width, height;
- 		//glm::mat4x4 mvp;		
-		// Now these are split into separate parts
-		// (because we need to know whe
-		Front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
-		Front.y = sin(glm::radians(pitch));
-		Front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
-		cameraFront = glm::normalize(Front);
-		Horizontal = glm::normalize(glm::cross(Front, cameraUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+
+		//Front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
+		//Front.y = sin(glm::radians(pitch));
+		//Front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
+		//cameraFront = glm::normalize(Front);
+		//Horizontal = glm::normalize(glm::cross(Front, cameraUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 		//Up = glm::normalize(glm::cross(Right, Front));
 
 
