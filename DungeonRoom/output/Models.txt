@@ -1,6 +1,6 @@
 Mesh_Name Utah_Teapot_xyz_n.ply
-Position -90 60 0
-Rotation -0.349066 0 0
+Position -175 135 0
+Rotation 4.65093 -6.4 0
 Scale  0.4 0.4 0.4
 Colour  0.2 0.8 0.3
 Mesh_Name skull.ply
@@ -19,9 +19,9 @@ Rotation 0 0 0
 Scale  50 50 50
 Colour  0.74 0.86 1
 Mesh_Name blunt.ply
-Position 80 300 -695
-Rotation -12.3 -9.69813 18.3
-Scale  1.7 1.7 1.7
+Position 255 175 -655
+Rotation -12.7 -9.3 11.9
+Scale  4.2 4.2 4.2
 Colour  0.74 0.86 1
 Mesh_Name table.ply
 Position 0 0 0

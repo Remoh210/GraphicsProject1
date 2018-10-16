@@ -240,114 +240,150 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 //Scale 0.1 0.1 0.1
 //Colour  0.2 0.8 0.3
 
-void loadModels(std::string filename, std::vector<cMeshObject*> models) {
-	filename = "output/" + filename;
-	//cMeshObject* model1 = models.at(0);
 
-	std::ifstream f(filename.c_str());
-	if (!f.is_open()) {
-		//error
-	}
-	std::string nextData;
+void loadModels(std::string filename, std::vector<cMeshObject*> models)
+{
+	std::ifstream file(("output/" + filename).c_str());
 
+	if (!file.is_open()) { return; }
 
-	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+	std::map<std::string, cMeshObject*> meshObjects;
+	for (unsigned int x = 0; x < models.size(); x++)
 	{
-		cMeshObject* CurModel = *it;
-		while (f >> nextData) {
-			if (nextData == "Mesh_Name")
-			{
-				break;
-			};
-		}
-
-		if (f.eof()) {
-			std::cout << "error" << std::endl;//error
-		}
-		f >> nextData;
-															//f >> CurModel->meshName; // TODO verify that this string does not include '\n' character
-		if (nextData == CurModel->meshName) {
-			std::cout << CurModel->meshName << std::endl;
-
-			while (f >> nextData) {
-				if (nextData == "Position")
-				{
-					break;
-				};
-			}
-
-			if (f.eof()) {
-				//error
-			}
-
-			f >> CurModel->position.x;
-			f >> CurModel->position.y;
-			f >> CurModel->position.z;
-
-			std::cout << CurModel->position.x << std::endl;
-			std::cout << CurModel->position.y << std::endl;
-			std::cout << CurModel->position.z << std::endl;
-
-			while (f >> nextData) {
-				if (nextData == "Rotation")
-				{
-					break;
-				};
-			}
-			if (f.eof()) {
-				//error
-			}
-
-			f >> CurModel->postRotation.x;
-			f >> CurModel->postRotation.y;
-			f >> CurModel->postRotation.z;
-
-			std::cout << CurModel->postRotation.x << std::endl;
-			std::cout << CurModel->postRotation.y << std::endl;
-			std::cout << CurModel->postRotation.z << std::endl;
-
-
-			//Searching for Scale
-			while (f >> nextData) {
-				if (nextData == "Scale")
-				{
-					break;
-				};
-			}
-			if (f.eof()) {
-				//error
-			}
-
-			f >> CurModel->nonUniformScale.x;
-			f >> CurModel->nonUniformScale.y;
-			f >> CurModel->nonUniformScale.z;
-
-			std::cout << CurModel->nonUniformScale.x << std::endl;
-			std::cout << CurModel->nonUniformScale.y << std::endl;
-			std::cout << CurModel->nonUniformScale.z << std::endl;
-		}
-
-			while (f >> nextData) {
-				if (nextData == "Colour")
-				{
-					break;
-				};
-			}
-			if (f.eof()) {
-				//error
-			}
-
-			f >> CurModel->objColour.x;
-			f >> CurModel->objColour.y;
-			f >> CurModel->objColour.z;
-
-			std::cout << CurModel->objColour.x << std::endl;
-			std::cout << CurModel->objColour.y << std::endl;
-			std::cout << CurModel->objColour.z << std::endl;
-
-
+		std::string meshName = models[x]->meshName;
+		meshObjects[meshName] = models[x];
 	}
+
+	while (true)
+	{
+		std::string meshName, unused;
+		file >> unused >> meshName;
+		if (meshName == "") break;
+
+		if (meshObjects.find(meshName) == meshObjects.end()) continue;
+
+		std::cout << "Loading model " << meshName << std::endl;
+		cMeshObject *CurModel = meshObjects.at(meshName);
+
+		file >> unused >> CurModel->position.x >> CurModel->position.y >> CurModel->position.z;
+		file >> unused >> CurModel->postRotation.x >> CurModel->postRotation.y >> CurModel->postRotation.z;
+		file >> unused >> CurModel->nonUniformScale.x >> CurModel->nonUniformScale.y >> CurModel->nonUniformScale.z;
+		file >> unused >> CurModel->objColour.x >> CurModel->objColour.y >> CurModel->objColour.z;
+	}
+	file.close();
 }
+
+
+
+
+//void loadModels(std::string filename, std::vector<cMeshObject*> models) {
+//	filename = "output/" + filename;
+//	//cMeshObject* model1 = models.at(0);
+//
+//	std::ifstream f(filename.c_str());
+//	if (!f.is_open()) {
+//		//error
+//	}
+//	std::string nextData;
+//
+//
+//	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+//	{
+//		cMeshObject* CurModel = *it;
+//		while (f >> nextData) {
+//			if (nextData == "Mesh_Name")
+//			{
+//				break;
+//			};
+//		}
+//
+//		if (f.eof()) {
+//			std::cout << "error" << std::endl;//error
+//		}
+//		f >> nextData;
+//															//f >> CurModel->meshName; // TODO verify that this string does not include '\n' character
+//		if (nextData == CurModel->meshName) {
+//			std::cout << CurModel->meshName << std::endl;
+//
+//			while (f >> nextData) {
+//				if (nextData == "Position")
+//				{
+//					break;
+//				};
+//			}
+//
+//			if (f.eof()) {
+//				//error
+//			}
+//
+//			f >> CurModel->position.x;
+//			f >> CurModel->position.y;
+//			f >> CurModel->position.z;
+//
+//			std::cout << CurModel->position.x << std::endl;
+//			std::cout << CurModel->position.y << std::endl;
+//			std::cout << CurModel->position.z << std::endl;
+//
+//			while (f >> nextData) {
+//				if (nextData == "Rotation")
+//				{
+//					break;
+//				};
+//			}
+//			if (f.eof()) {
+//				//error
+//			}
+//
+//			f >> CurModel->postRotation.x;
+//			f >> CurModel->postRotation.y;
+//			f >> CurModel->postRotation.z;
+//
+//			std::cout << CurModel->postRotation.x << std::endl;
+//			std::cout << CurModel->postRotation.y << std::endl;
+//			std::cout << CurModel->postRotation.z << std::endl;
+//
+//
+//			//Searching for Scale
+//			while (f >> nextData) {
+//				if (nextData == "Scale")
+//				{
+//					break;
+//				};
+//			}
+//			if (f.eof()) {
+//				//error
+//			}
+//
+//			f >> CurModel->nonUniformScale.x;
+//			f >> CurModel->nonUniformScale.y;
+//			f >> CurModel->nonUniformScale.z;
+//
+//			std::cout << CurModel->nonUniformScale.x << std::endl;
+//			std::cout << CurModel->nonUniformScale.y << std::endl;
+//			std::cout << CurModel->nonUniformScale.z << std::endl;
+//		}
+//
+//			while (f >> nextData) {
+//				if (nextData == "Colour")
+//				{
+//					break;
+//				};
+//			}
+//			if (f.eof()) {
+//				//error
+//			}
+//
+//			f >> CurModel->objColour.x;
+//			f >> CurModel->objColour.y;
+//			f >> CurModel->objColour.z;
+//
+//			std::cout << CurModel->objColour.x << std::endl;
+//			std::cout << CurModel->objColour.y << std::endl;
+//			std::cout << CurModel->objColour.z << std::endl;
+//
+//
+//	}
+//}
 
 
 

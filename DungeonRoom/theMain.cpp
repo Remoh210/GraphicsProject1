@@ -45,17 +45,13 @@ float g_lightBrightness = 400000.0f;
 
 unsigned int numberOfObjectsToDraw = 0;
 
-const unsigned int SCR_WIDTH = 1200;
-const unsigned int SCR_HEIGHT = 768;
-
-
-
-//glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-glm::vec3 g_CameraEye = glm::vec3( 0.0, 150.0, 250.0f );
+glm::vec3 g_CameraEye = glm::vec3( 0.0, 0.0, 250.0f );
 
 glm::vec3 Front;
 glm::vec3 Horizontal;
@@ -97,11 +93,16 @@ int main(void)
 	}
 
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR);
 
 	glfwSetKeyCallback(window, key_callback);
-	//glfwSetKeyCallback()
 	glfwSetCursorPosCallback(window, mouse_callback);
+
+	//glfwSetKeyCallback()
+	
 
 	glfwMakeContextCurrent(window);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);

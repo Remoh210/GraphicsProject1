@@ -6,8 +6,8 @@
 
 int index = 0;
 // This has all the keyboard, mouse, and controller stuff
-float lastX = SCR_WIDTH / 2.0f;
-float lastY = SCR_HEIGHT / 2.0f;
+float lastX;
+float lastY;
 
 float pitch;
 float yaw;
@@ -15,7 +15,7 @@ float yaw;
 extern sLight* pTheOneLight;	//  = NULL;
 extern cLightManager* LightManager;
 int lightIndex = 0;
-bool firstMouse;
+bool firstMouse = true;
 
 cMeshObject* closedModel;
 
@@ -116,12 +116,12 @@ void key_callback( GLFWwindow* window,
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	/*if (firstMouse)
+	if (firstMouse)
 	{
-		lastX = xpos;
-		lastY = ypos;
+		lastX = SCR_WIDTH / 2.0f;;
+		lastY = SCR_HEIGHT / 2.0f;
 		firstMouse = false;
-	}*/
+	}
 
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos;
