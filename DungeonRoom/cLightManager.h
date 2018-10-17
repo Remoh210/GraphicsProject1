@@ -22,6 +22,8 @@ struct sLight
 	void SetSpecularHighlight( glm::vec3 rgbColour, float power );
 	// .. and so on
 
+	std::string lightName;
+
 	int position_UniLoc;
 	int diffuse_UniLoc;
 	int specular_UniLoc;

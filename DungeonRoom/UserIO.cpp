@@ -47,10 +47,19 @@ void key_callback( GLFWwindow* window,
 	}
 	
 
+	if (glfwGetKey(window, GLFW_KEY_K))
+	{
+		saveLightInfo("lights.txt", LightManager->vecLights);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_L))
+	{
+		loadLights("lights.txt", LightManager->vecLights);
+	}
 
 
 	//Chose the model
-	if (key == GLFW_KEY_N && action == GLFW_PRESS)
+	if (key == GLFW_KEY_M && action == GLFW_PRESS)
 	{
 		if (index < (vec_pObjectsToDraw.size() - 1)) {
 			
@@ -103,11 +112,7 @@ void key_callback( GLFWwindow* window,
 		LightManager->vecLights.at(lightIndex)->AtenSphere = false;
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_L))
-	{
-		saveLightInfo("lights.txt", LightManager->vecLights);
-		//LightManager->vecLights.at(lightIndex)->AtenSphere = false;
-	}
+
 	
 
 	return;

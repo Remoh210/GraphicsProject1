@@ -1,38 +1,52 @@
+Friendly_Name teapot
 Mesh_Name Utah_Teapot_xyz_n.ply
-Position -175 135 0
-Rotation 4.65093 -6.4 0
+Position -25 60 0
+Rotation -0.349066 0 0
 Scale  0.4 0.4 0.4
 Colour  0.2 0.8 0.3
+Friendly_Name skull
 Mesh_Name skull.ply
-Position 0 50 0
+Position -35 50 0
 Rotation 0 -0.349066 0
 Scale  1.5 1.5 1.5
 Colour  1 1 1
+Friendly_Name spider0
 Mesh_Name spider.ply
-Position 80 50 0
+Position 210 50 0
 Rotation 0 0 0
 Scale  0.2 0.2 0.2
 Colour  0.24 0.56 1
+Friendly_Name spider1
+Mesh_Name spider.ply
+Position 285 50 0
+Rotation 0 0 0
+Scale  0.2 0.2 0.2
+Colour  0.24 0.56 1
+Friendly_Name spider2
+Mesh_Name spider.ply
+Position 140 50 0
+Rotation 0 0 0
+Scale  0.2 0.2 0.2
+Colour  0.24 0.56 1
+Friendly_Name room
 Mesh_Name room.ply
 Position 0 0 300
 Rotation 0 0 0
 Scale  50 50 50
 Colour  0.74 0.86 1
+Friendly_Name blunt
 Mesh_Name blunt.ply
-Position 255 175 -655
-Rotation -12.7 -9.3 11.9
-Scale  4.2 4.2 4.2
+Position 0 0 300
+Rotation 0 -0.698132 0
+Scale  1 1 1
 Colour  0.74 0.86 1
+Friendly_Name 
 Mesh_Name table.ply
 Position 0 0 0
 Rotation 0 0 0
 Scale  0.9 0.9 0.9
 Colour  0.1 0.5 0.31
-Mesh_Name MeshLab_Fractal_Terrain_xyz_n.ply
-Position 0 -10 0
-Rotation 0 0 0
-Scale  1 1 1
-Colour  1 1 1
+Friendly_Name DebugSphere
 Mesh_Name Sphere_320_faces_xyz_n.ply
 Position 0 0 0
 Rotation 0 0 0

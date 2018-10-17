@@ -71,6 +71,8 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models);
 
 void loadModels(std::string filename, std::vector<cMeshObject*> models);
 
+void loadLights(std::string filename, std::vector<sLight*> lights);
+
 void DrawObject( cMeshObject* pCurrentMesh,
 				 glm::mat4x4 &matModel, 
 				 GLuint shaderProgramID );

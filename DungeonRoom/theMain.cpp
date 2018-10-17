@@ -96,7 +96,7 @@ int main(void)
 
 
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
@@ -199,6 +199,7 @@ int main(void)
 		pTheOneLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
 		pTheOneLight->diffuse = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);// White light
 		pTheOneLight->param2.x = 1.0f;
+		pTheOneLight->lightName = "pTheOneLight";
 		//pTheOneLight->AtenSphere = false;
 		LightManager->vecLights.push_back(pTheOneLight);
 		LightManager->LoadUniformLocations(program);
@@ -212,6 +213,7 @@ int main(void)
 		pTheSecondLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
 		pTheSecondLight->diffuse = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);// White light
 		pTheSecondLight->param2.x = 1.0f;
+		pTheSecondLight->lightName = "pTheSecondLight";
 		//pTheSecondLight->AtenSphere = false;
 		LightManager->vecLights.push_back(pTheSecondLight);
 		LightManager->LoadUniformLocations(program);
@@ -224,6 +226,7 @@ int main(void)
 		pTheThirdLight->atten.y = 0.01f;	//			float linearAtten = 0.01f;
 		pTheThirdLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
 		pTheThirdLight->diffuse = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);// White light
+		pTheThirdLight->lightName = "pTheThirdLight";
 		pTheThirdLight->param2.x = 1.0f;
 		//pTheThirdLight->AtenSphere = false;
 		LightManager->vecLights.push_back(pTheThirdLight);
@@ -239,6 +242,7 @@ int main(void)
 		pTheForthLight->diffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);// White light
 		pTheForthLight->param2.x = 1.0f;
 		//pTheForthLight->AtenSphere - false;
+		pTheForthLight->lightName = "MainLight";
 		LightManager->vecLights.push_back(pTheForthLight);
 		LightManager->LoadUniformLocations(program);
 	}
@@ -247,7 +251,7 @@ int main(void)
 
 	
 	//Reload from the file
-	loadModels("Models.txt", vec_pObjectsToDraw);
+	//loadModels("Models.txt", vec_pObjectsToDraw);
 	//*****************************************************************
 	
 	// Draw the "scene" (run the program)

@@ -107,31 +107,31 @@ bool LoadPlyFileData( std::string fileName )
 }
 
 
+//void saveLightInfo(std::string filename, std::vector<sLight*> lights)
+//{
+//	filename = "output/" + filename;
+//	std::string line;
+//	std::ofstream file(filename.c_str());
+//	if (file.is_open())
+//	{
+//		for (std::vector<sLight*>::iterator it = lights.begin(); it != lights.end(); ++it) 
+//		{
+//			sLight* CurLight = *it;
+//			file << "Position_xyz: " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
+//			file << "Attenuation_xyz: " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
+//			file << "Diffuse_rgbw: " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
+//			file << "on_off: " << CurLight->param2.x << "\n";
+//			//pTheOneLight->AtenSphere = false;
+//			//LightManager->vecLights.push_back(pTheOneLight);
+//			//LightManager->LoadUniformLocations(program);
+//		}
+//		std::cout << "Lights information saved to " << filename.c_str() << std::endl;
+//		file.close();
+//	}
+//}
+
+
 void saveLightInfo(std::string filename, std::vector<sLight*> lights)
-{
-	filename = "output/" + filename;
-	std::string line;
-	std::ofstream file(filename.c_str());
-	if (file.is_open())
-	{
-		for (std::vector<sLight*>::iterator it = lights.begin(); it != lights.end(); ++it) 
-		{
-			sLight* CurLight = *it;
-			file << "Position_xyz: " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
-			file << "Attenuation_xyz: " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
-			file << "Diffuse_rgbw: " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
-			file << "on_off: " << CurLight->param2.x << "\n";
-			//pTheOneLight->AtenSphere = false;
-			//LightManager->vecLights.push_back(pTheOneLight);
-			//LightManager->LoadUniformLocations(program);
-		}
-		std::cout << "Lights information saved to " << filename.c_str() << std::endl;
-		file.close();
-	}
-}
-
-
-void LoadLightInfo(std::string filename, std::vector<sLight*> lights)
 {
 	filename = "output/" + filename;
 	std::string line;
@@ -141,10 +141,11 @@ void LoadLightInfo(std::string filename, std::vector<sLight*> lights)
 		for (std::vector<sLight*>::iterator it = lights.begin(); it != lights.end(); ++it)
 		{
 			sLight* CurLight = *it;
-			file << "Position_xyz: " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
-			file << "Attenuation_xyz: " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
-			file << "Diffuse_rgbw: " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
-			file << "on_off: " << CurLight->param2.x << "\n";
+			file << "Name " << CurLight->lightName << "\n";
+			file << "Position_xyz " << CurLight->position.x << " " << CurLight->position.y << " " << CurLight->position.z << "\n";
+			file << "Attenuation_xyz " << CurLight->atten.x << " " << CurLight->atten.y << " " << CurLight->atten.z << "\n";
+			file << "Diffuse_rgbw " << CurLight->diffuse.x << " " << CurLight->diffuse.y << " " << CurLight->diffuse.z << " " << CurLight->diffuse.w << "\n";
+			file << "on_off " << CurLight->param2.x << "\n";
 			//pTheOneLight->AtenSphere = false;
 			//LightManager->vecLights.push_back(pTheOneLight);
 			//LightManager->LoadUniformLocations(program);
@@ -165,6 +166,7 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 		for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
 		{
 			cMeshObject* CurModel = *it;
+			file << "Friendly_Name " << CurModel->friendlyName << "\n";
 			file << "Mesh_Name " << CurModel->meshName << "\n";
 			file << "Position " << CurModel->position.x << " " << CurModel->position.y << " " << CurModel->position.z << "\n";
 			file << "Rotation " << CurModel->postRotation.x << " " << CurModel->postRotation.y << " " << CurModel->postRotation.z << "\n";
@@ -181,56 +183,6 @@ void saveModelInfo(std::string filename, std::vector<cMeshObject*> models)
 //Load models Info from the file
 
 
-
-
-//
-//struct MeshData
-//{
-//	std::string MeshName;
-//	float PositionX, PositionY, PositionZ;
-//	float RotationX, RotationY, RotationZ;
-//	float ScaleX, ScaleY, ScaleZ;
-//	float ColorX, ColorY, ColorZ;
-//
-//};
-//
-//void LoadMeshFile(const std::string &filename, std::map<std::string, cMeshObject*> &meshes)
-//{
-//
-//	std::ifstream theFile(filename.c_str());
-//	if (!theFile.is_open())
-//	{
-//		//return false;
-//	}
-//
-//	std::vector<MeshData> meshDatas;
-//
-//	while (true)
-//	{
-//		MeshData meshData;
-//		theFile >> meshData.MeshName;
-//		theFile >> meshData.PositionX >> meshData.PositionY >> meshData.PositionZ;
-//		theFile >> meshData.RotationX >> meshData.RotationY >> meshData.RotationZ;
-//		theFile >> meshData.ScaleX >> meshData.ScaleY >> meshData.ScaleZ;
-//		theFile >> meshData.ColorX >> meshData.ColorY >> meshData.ColorZ;
-//
-//		meshDatas.push_back(meshData);
-//
-//		if (theFile.eof()) break;
-//	}
-//
-//	for (unsigned int x = 0; x < meshDatas.size(); x++)
-//	{
-//		// don't use auto
-//		auto myMeshIterator = meshes.find(meshDatas[x].MeshName);
-//		if (myMeshIterator == meshes.end()) continue;
-//
-//		cMeshObject *currentMesh = myMeshIterator.second;
-//		MeshData myMeshData = meshDatas[x];
-//		// set data to current mesh from myMeshData
-//	}
-//
-//}
 
 
 //TXT OUTPUT LOOKS LIKE THIS
@@ -250,21 +202,22 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models)
 	std::map<std::string, cMeshObject*> meshObjects;
 	for (unsigned int x = 0; x < models.size(); x++)
 	{
-		std::string meshName = models[x]->meshName;
-		meshObjects[meshName] = models[x];
+		std::string friendlyName = models[x]->friendlyName;
+		meshObjects[friendlyName] = models[x];
 	}
 
 	while (true)
 	{
-		std::string meshName, unused;
-		file >> unused >> meshName;
-		if (meshName == "") break;
+		std::string friendlyName, unused;
+		file >> unused >> friendlyName;
+		if (friendlyName == "") break;
 
-		if (meshObjects.find(meshName) == meshObjects.end()) continue;
+		if (meshObjects.find(friendlyName) == meshObjects.end()) continue;
 
-		std::cout << "Loading model " << meshName << std::endl;
-		cMeshObject *CurModel = meshObjects.at(meshName);
+		std::cout << "Loading models " << friendlyName << std::endl;
+		cMeshObject *CurModel = meshObjects.at(friendlyName);
 
+		file >> unused >> CurModel->meshName;
 		file >> unused >> CurModel->position.x >> CurModel->position.y >> CurModel->position.z;
 		file >> unused >> CurModel->postRotation.x >> CurModel->postRotation.y >> CurModel->postRotation.z;
 		file >> unused >> CurModel->nonUniformScale.x >> CurModel->nonUniformScale.y >> CurModel->nonUniformScale.z;
@@ -274,6 +227,41 @@ void loadModels(std::string filename, std::vector<cMeshObject*> models)
 }
 
 
+
+
+void loadLights(std::string filename, std::vector<sLight*> lights)
+{
+	std::ifstream file(("output/" + filename).c_str());
+
+	if (!file.is_open()) { return; }
+
+	std::map<std::string, sLight*> mapLights;
+	for (unsigned int x = 0; x < lights.size(); x++)
+	{
+		std::string lightName = lights[x]->lightName;
+		mapLights[lightName] = lights[x];
+	}
+
+	while (true)
+	{
+		std::string lightName, unused;
+		file >> unused >> lightName;
+		if (lightName == "") break;
+
+		if (mapLights.find(lightName) == mapLights.end()) continue;
+
+		std::cout << "Loading Lights " << lightName << std::endl;
+		sLight *CurLight = mapLights.at(lightName);
+
+		//file >> unused >> CurLight->lightName;
+		file >> unused >> CurLight->position.x >> CurLight->position.y >> CurLight->position.z;
+		file >> unused >> CurLight->atten.x >> CurLight->atten.y >> CurLight->atten.z;
+		file >> unused >> CurLight->diffuse.x  >> CurLight->diffuse.y >> CurLight->diffuse.z >> CurLight->diffuse.w;
+		file >> unused >> CurLight->param2.x;
+
+	}
+	file.close();
+}
 
 
 //void loadModels(std::string filename, std::vector<cMeshObject*> models) {
