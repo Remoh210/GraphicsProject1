@@ -38,22 +38,24 @@ void key_callback( GLFWwindow* window,
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
 		saveModelInfo("Models.txt", vec_pObjectsToDraw);
+		saveLightInfo("lights.txt", LightManager->vecLights);
 	}
 
 	//LOAD MODELS
 	if (key == GLFW_KEY_H && action == GLFW_PRESS)
 	{
-		loadModels("Models.txt", vec_pObjectsToDraw);
+		
 	}
 	
 
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
-		saveLightInfo("lights.txt", LightManager->vecLights);
+		
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_L))
 	{
+		loadModels("Models.txt", vec_pObjectsToDraw);
 		loadLights("lights.txt", LightManager->vecLights);
 	}
 
@@ -66,7 +68,7 @@ void key_callback( GLFWwindow* window,
 			index = index + 1;
 		}
 		else { index = 0; }
-		std::cout << "Model " << vec_pObjectsToDraw.at(index)->meshName << "is Chosen" << std::endl;
+		std::cout << "Model " << vec_pObjectsToDraw.at(index)->meshName << " is Chosen" << std::endl;
 	}
 
 
@@ -78,7 +80,7 @@ void key_callback( GLFWwindow* window,
 			lightIndex = lightIndex + 1;
 		}
 		else { lightIndex = 0; }
-		std::cout << "Model " << vec_pObjectsToDraw.at(index)->meshName << "is Chosen" << std::endl;
+		std::cout << "Light " << LightManager->vecLights.at(lightIndex)->lightName << " is Chosen" << std::endl;
 	}
 
 

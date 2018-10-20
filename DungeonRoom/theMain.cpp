@@ -187,66 +187,54 @@ int main(void)
 
 	LightManager = new cLightManager();
 	sLight* pTheOneLight = NULL;
-	sLight* pTheSecondLight = NULL;
-	sLight* pTheThirdLight = NULL;
-	sLight* pTheForthLight = NULL;
-	{
-
-		pTheOneLight = new sLight();
-		pTheOneLight->position = glm::vec4(-60.0f, 70.0f, 0.0f, 1.0f);
-		pTheOneLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
-		pTheOneLight->atten.y = 0.001f;	//			float linearAtten = 0.01f;
-		pTheOneLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
-		pTheOneLight->diffuse = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);// White light
-		pTheOneLight->param2.x = 1.0f;
-		pTheOneLight->lightName = "pTheOneLight";
-		//pTheOneLight->AtenSphere = false;
-		LightManager->vecLights.push_back(pTheOneLight);
-		LightManager->LoadUniformLocations(program);
-	}
+	//sLight* pTheSecondLight = NULL;
+	//sLight* pTheThirdLight = NULL;
+	//sLight* pTheForthLight = NULL;
 
 	{
-		pTheSecondLight = new sLight();
-		pTheSecondLight->position = glm::vec4(0.0f, 70.0f, 0.0f, 1.0f);
-		pTheSecondLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
-		pTheSecondLight->atten.y = 0.01f;	//			float linearAtten = 0.01f;
-		pTheSecondLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
-		pTheSecondLight->diffuse = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);// White light
-		pTheSecondLight->param2.x = 1.0f;
-		pTheSecondLight->lightName = "pTheSecondLight";
-		//pTheSecondLight->AtenSphere = false;
-		LightManager->vecLights.push_back(pTheSecondLight);
-		LightManager->LoadUniformLocations(program);
-	}
-
-	{
-		pTheThirdLight = new sLight();
-		pTheThirdLight->position = glm::vec4(60.0f, 70.0f, 0.0f, 1.0f);
-		pTheThirdLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
-		pTheThirdLight->atten.y = 0.01f;	//			float linearAtten = 0.01f;
-		pTheThirdLight->atten.z = 0.0001f;	//			float quadAtten = 0.001f;
-		pTheThirdLight->diffuse = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);// White light
-		pTheThirdLight->lightName = "pTheThirdLight";
-		pTheThirdLight->param2.x = 1.0f;
-		//pTheThirdLight->AtenSphere = false;
-		LightManager->vecLights.push_back(pTheThirdLight);
-		LightManager->LoadUniformLocations(program);
-	}
-
-	{
-		pTheForthLight = new sLight();
-		pTheForthLight->position = glm::vec4(1.0f, 400.0f, 0.0f, 1.0f);
-		pTheForthLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
-		pTheForthLight->atten.y = 0.0001f;	//			float linearAtten = 0.01f;
-		pTheForthLight->atten.z = 0.00001f;	//			float quadAtten = 0.001f;
-		pTheForthLight->diffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);// White light
-		pTheForthLight->param2.x = 1.0f;
+		sLight* pTheMainLight = new sLight();
+		pTheMainLight->position = glm::vec4(1.0f, 400.0f, 0.0f, 1.0f);
+		pTheMainLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
+		pTheMainLight->atten.y = 0.0001f;	//			float linearAtten = 0.01f;
+		pTheMainLight->atten.z = 0.00001f;	//			float quadAtten = 0.001f;
+		pTheMainLight->diffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);// White light
+		pTheMainLight->param2.x = 1.0f;
 		//pTheForthLight->AtenSphere - false;
-		pTheForthLight->lightName = "MainLight";
-		LightManager->vecLights.push_back(pTheForthLight);
+		pTheMainLight->lightName = "MainLight";
+		LightManager->vecLights.push_back(pTheMainLight);
 		LightManager->LoadUniformLocations(program);
 	}
 
+	for(int light_count = 0; light_count < 4;  light_count++)
+	{
+		sLight* pTorch = new sLight();
+		pTorch->position = glm::vec4(light_count * 10.0f, 400.0f, 0.0f, 1.0f);
+		pTorch->atten.x = 0.0f;	// 			float constAtten = 0.0f;
+		pTorch->atten.y = 0.0001f;	//			float linearAtten = 0.01f;
+		pTorch->atten.z = 0.000015f;	//			float quadAtten = 0.001f;
+		pTorch->diffuse = glm::vec4(232 /250.0f, 109 / 250.0f, 27/250.0f, 1.0f);// White light
+		pTorch->param2.x = 1.0f;
+		//pTheForthLight->AtenSphere - false;
+		pTorch->lightName = "Torch_Light" + std::to_string(light_count);
+		LightManager->vecLights.push_back(pTorch);
+		LightManager->LoadUniformLocations(program);
+	}
+
+	{
+		sLight* ChestLight = new sLight();
+		ChestLight->position = glm::vec4(-675.0f, 40.0f, 520.0f, 1.0f);
+		ChestLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
+		ChestLight->atten.y = 0.0001f;	//			float linearAtten = 0.01f;
+		ChestLight->atten.z = 0.000021f;	//			float quadAtten = 0.001f;
+		ChestLight->diffuse = glm::vec4(246 / 250.0f, 10/ 250.0f, 10 / 215.0f, 0.0f);
+		ChestLight->param2.x = 1.0f;
+		//pTheForthLight->AtenSphere - false;
+		ChestLight->lightName = "ChestLight";
+		LightManager->vecLights.push_back(ChestLight);
+		LightManager->LoadUniformLocations(program);
+	}
+
+	//saveLightInfo("Default.txt")
 	cLightHelper* pLightHelper = new cLightHelper();
 
 	

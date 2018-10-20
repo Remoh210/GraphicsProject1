@@ -1,20 +1,30 @@
-Name pTheOneLight
-Position_xyz -320 70 -105
-Attenuation_xyz 0 0.001 0.0001
-Diffuse_rgbw 1 0 0 1
-on_off 1
-Name pTheSecondLight
-Position_xyz -280 70 -655
-Attenuation_xyz 0 0.00460957 3.457e-05
-Diffuse_rgbw 0 1 0 1
-on_off 1
-Name pTheThirdLight
-Position_xyz 195 295 -620
-Attenuation_xyz 0 0.00603198 4.97473e-05
-Diffuse_rgbw 0 0 1 1
-on_off 1
 Name MainLight
-Position_xyz 1 400 0
-Attenuation_xyz 0 0.0001 1e-05
+Position_xyz -309 1070 -60
+Attenuation_xyz 0 0.0001 1.0253e-05
 Diffuse_rgbw 1 1 1 1
 on_off 1
+Name Torch_Light0
+Position_xyz 330 330 95
+Attenuation_xyz 0 0.0001 1.5e-05
+Diffuse_rgbw 0.928 0.436 0.108 1
+on_off 1
+Name Torch_Light1
+Position_xyz -180 290 625
+Attenuation_xyz 0 6.98337e-05 4.72219e-05
+Diffuse_rgbw 0.928 0.436 0.108 1
+on_off 1
+Name Torch_Light2
+Position_xyz -210 330 -505
+Attenuation_xyz 0 0.000111776 2.96611e-05
+Diffuse_rgbw 0.928 0.436 0.108 1
+on_off 1
+Name Torch_Light3
+Position_xyz -790 295 25
+Attenuation_xyz 0 0.0001 3.96494e-05
+Diffuse_rgbw 0.928 0.436 0.108 1
+on_off 1
+Name ChestLight
+Position_xyz -475 40 525
+Attenuation_xyz 0 0.0001 2.1e-05
+Diffuse_rgbw 0.984 0.04 0.0465116 1
+on_off 0

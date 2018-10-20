@@ -36,6 +36,17 @@ void LoadModelTypes( cVAOMeshManager* pTheVAOMeshManager, GLuint shaderProgramID
 	bluntInfo.bVertexBufferIsDynamic = true;
 	pTheVAOMeshManager->LoadModelIntoVAO(bluntInfo, shaderProgramID);
 
+	sModelDrawInfo chest_bottomInfo;
+	chest_bottomInfo.meshFileName = "chest_bottom.ply";	// "MeshLab_Fractal_Terrain_xyz.ply";
+	// Will alow me to update the vertex data in the mesh
+	chest_bottomInfo.bVertexBufferIsDynamic = true;
+	pTheVAOMeshManager->LoadModelIntoVAO(chest_bottomInfo, shaderProgramID);
+
+	sModelDrawInfo chest_topInfo;
+	chest_topInfo.meshFileName = "chest_top.ply";	
+	chest_topInfo.bVertexBufferIsDynamic = true;
+	pTheVAOMeshManager->LoadModelIntoVAO(chest_topInfo, shaderProgramID);
+
 	sModelDrawInfo sphereInfo;
 	sphereInfo.meshFileName = "Sphere_320_faces_xyz_n.ply";			// "Sphere_320_faces_xyz.ply";
 	pTheVAOMeshManager->LoadModelIntoVAO(sphereInfo, shaderProgramID);
@@ -117,39 +128,65 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 		vec_pObjectsToDraw.push_back(pRoom);
 	}
 
+	for (int count = 0; count < 4; count++)
 	{
 		cMeshObject* pBlunt = new cMeshObject();
 		pBlunt->position = glm::vec3(0.0f, 0.0f, 300.0f);
-		pBlunt->postRotation = glm::vec3(0.0f, glm::radians(-40.0f), 0.0f);
+		pBlunt->postRotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		pBlunt->objColour = glm::vec3(0.74f, 0.86f, 1.0f);
-		pBlunt->friendlyName = "blunt";
+		pBlunt->friendlyName = "blunt" + std::to_string(count);
 		pBlunt->meshName = "blunt.ply";
-		pBlunt->setUniformScale(1.0f);
+		pBlunt->setUniformScale(1.5f);
 		pBlunt->bIsVisible = true;
 		vec_pObjectsToDraw.push_back(pBlunt);
 	}
 
+	{
+		cMeshObject* pTable = new cMeshObject();
+		pTable->position = glm::vec3(0.0f, 0.0f, 0.0f);
+		pTable->objColour = glm::vec3(85 / 255.0f, 33 / 255.0f, 18 / 255.0f);
+		//pTable->setUniformScale(0.9f);
+		pTable->friendlyName = "table";
+		pTable->meshName = "table.ply";
+		vec_pObjectsToDraw.push_back(pTable);
+	}
+
+
 
 	{
+		cMeshObject* pChest_b = new cMeshObject();
+		pChest_b->position = glm::vec3(-675.0f, -20.0f, 520.0f);
+		pChest_b->objColour = glm::vec3(85 / 255.0f, 33 / 255.0f, 18 / 255.0f);
+		//pChest_b->setUniformScale(0.9f);
+		pChest_b->friendlyName = "chest_bottom";
+		pChest_b->meshName = "chest_bottom.ply";
+		vec_pObjectsToDraw.push_back(pChest_b);
+	}
+
+	{
+		cMeshObject* pChest_top = new cMeshObject();
+		pChest_top->position = glm::vec3(-740.0f, 30.0f, 505.0f);
+		pChest_top->objColour = glm::vec3(85 / 255.0f, 33 / 255.0f, 18 / 255.0f);
+		//pChest_top_b->setUniformScale(0.9f);
+		pChest_top->friendlyName = "chest_top";
+		pChest_top->meshName = "chest_top.ply";
+		vec_pObjectsToDraw.push_back(pChest_top);
+	}
+
+	for(int torch_count = 0; torch_count < 4; torch_count++)
+	{
 		cMeshObject* pTorch = new cMeshObject();
-		pTorch->position = glm::vec3(0.0f, 0.0f, 300.0f);
-		pTorch->postRotation = glm::vec3(0.0f, glm::radians(-40.0f), 0.0f);
+		pTorch->position = glm::vec3(torch_count * 10.0f, 0.0f, 300.0f);
+		pTorch->postRotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		pTorch->objColour = glm::vec3(0.74f, 0.86f, 1.0f);
-		pTorch->friendlyName = "torch";
+		pTorch->friendlyName = "torch" + std::to_string(torch_count);
 		pTorch->meshName = "torch.ply";
 		pTorch->setUniformScale(1.0f);
 		pTorch->bIsVisible = true;
 		vec_pObjectsToDraw.push_back(pTorch);
 	}
 
-	{
-		cMeshObject* pTable = new cMeshObject();
-		pTable->position = glm::vec3( 0.0f, 0.0f, 0.0f );
-		pTable->objColour = glm::vec3(  0.1f, 0.5f, 0.31f );
-		pTable->setUniformScale(0.9f);
-		pTable->meshName = "table.ply";	
-		vec_pObjectsToDraw.push_back(pTable);
-	}
+
 
 	//cMeshObject* pRogerRabbit = NULL;
 
