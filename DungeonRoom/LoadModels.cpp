@@ -93,7 +93,7 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 		cMeshObject* pSkull = new cMeshObject();
 		pSkull->position = glm::vec3(0.0f, 50.0f, 0.0f);
 		pSkull->postRotation = glm::vec3( 0.0f, glm::radians(-20.0f), 0.0f);
-		pSkull->objColour = glm::vec3(1.0f, 1.0f, 1.0f);
+		pSkull->objColour = glm::vec3(0.748f, 0.392f, 0.956f);//187 98  239
 		pSkull->friendlyName = "skull";
 		pSkull->meshName = "skull.ply";		
 		pSkull->setUniformScale(1.5f);

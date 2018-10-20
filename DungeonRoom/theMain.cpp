@@ -234,6 +234,21 @@ int main(void)
 		LightManager->LoadUniformLocations(program);
 	}
 
+
+	{
+		sLight* ChestLight = new sLight();
+		ChestLight->position = glm::vec4(-675.0f, 40.0f, 520.0f, 1.0f);
+		ChestLight->atten.x = 0.0f;	// 			float constAtten = 0.0f;
+		ChestLight->atten.y = 0.0001f;	//			float linearAtten = 0.01f;
+		ChestLight->atten.z = 0.000021f;	//			float quadAtten = 0.001f;
+		ChestLight->diffuse = glm::vec4(0.64f, 0.027f, 0.9f, 1.0f);
+		ChestLight->param2.x = 1.0f;
+		//pTheForthLight->AtenSphere - false;
+		ChestLight->lightName = "QuestLight";
+		LightManager->vecLights.push_back(ChestLight);
+		LightManager->LoadUniformLocations(program);
+	}
+
 	//saveLightInfo("Default.txt")
 	cLightHelper* pLightHelper = new cLightHelper();
 
