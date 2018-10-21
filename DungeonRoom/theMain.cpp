@@ -45,8 +45,8 @@ float g_lightBrightness = 400000.0f;
 
 unsigned int numberOfObjectsToDraw = 0;
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1000;
+const unsigned int SCR_HEIGHT = 800;
 
 
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);

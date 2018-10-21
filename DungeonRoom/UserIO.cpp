@@ -25,6 +25,12 @@ cMeshObject* CloseToObj(std::vector<cMeshObject*> models);
 
 cMeshObject* cloesetObj;
 
+void SwitchToWireFrame(std::vector<cMeshObject*> models);
+
+
+void SwitchToSolid(std::vector<cMeshObject*> models);
+
+
 void key_callback( GLFWwindow* window, 
 						  int key, 
 						  int scancode, 
@@ -47,13 +53,13 @@ void key_callback( GLFWwindow* window,
 	//LOAD MODELS
 	if (key == GLFW_KEY_H && action == GLFW_PRESS)
 	{
-		
+		SwitchToWireFrame(vec_pObjectsToDraw);
 	}
 	
 
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
-		
+		SwitchToSolid(vec_pObjectsToDraw);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_L))
@@ -374,4 +380,24 @@ cMeshObject* CloseToObj(std::vector<cMeshObject*> models)
 		//else { std::cout << "nothing" << std::endl; }
 	}
 	//return false;
+}
+
+
+void SwitchToWireFrame(std::vector<cMeshObject*> models)
+{
+	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+	{
+		cMeshObject* CurModel = *it;
+		CurModel->bIsWireFrame = true;
+	}
+}
+
+void SwitchToSolid(std::vector<cMeshObject*> models)
+{
+	for (std::vector<cMeshObject*>::iterator it = models.begin(); it != models.end(); ++it)
+	{
+		cMeshObject* CurModel = *it;
+		CurModel->bIsWireFrame = false;
+
+	}
 }
