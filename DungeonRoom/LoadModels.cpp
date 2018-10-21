@@ -95,24 +95,24 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 		pSkull->postRotation = glm::vec3( 0.0f, glm::radians(-20.0f), 0.0f);
 		pSkull->objColour = glm::vec3(0.748f, 0.392f, 0.956f);//187 98  239
 		pSkull->friendlyName = "skull";
+		pSkull->bIsInteractable = true;
 		pSkull->meshName = "skull.ply";		
 		pSkull->setUniformScale(1.5f);
 		vec_pObjectsToDraw.push_back(pSkull);
 	}
 
 
-	for (int count = 0; count < 3; count++) {
+	for (int countsp = 0; countsp < 3; countsp++) {
 
 		cMeshObject* pSpider = new cMeshObject();
 		pSpider->position = glm::vec3(80.0f, 50.0f, 0.0f);
 		//pSpider->postRotation = glm::vec3(0.0f, glm::radians(-20.0f), 0.0f);
 		pSpider->objColour = glm::vec3(0.24f, 0.56f, 1.0f);
-		pSpider->friendlyName = "spider" + std::to_string(count);
+		pSpider->friendlyName = "spider" + std::to_string(countsp);
 		pSpider->meshName = "spider.ply";
 		pSpider->setUniformScale(0.2f);
 		vec_pObjectsToDraw.push_back(pSpider);
 	}
-
 
 
 
@@ -188,6 +188,7 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 
 
 
+
 	//cMeshObject* pRogerRabbit = NULL;
 
 
@@ -208,6 +209,7 @@ void LoadModelsIntoScene( std::vector<cMeshObject*> &vec_pObjectsToDraw )
 
 		vec_pObjectsToDraw.push_back(pDebugSphere);
 	}
+
 
 	// ENDOF: Updated physics object
 

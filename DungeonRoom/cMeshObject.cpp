@@ -17,7 +17,7 @@ cMeshObject::cMeshObject()
 
 	this->objColour = glm::vec3(1.0f, 1.0f, 1.0f);	// white by default
 	this->bUseVertexColour = false;
-
+	this->bIsInteractable = false;
 	this->bDontLight = false;
 
 	this->velocity = glm::vec3(0.0f);

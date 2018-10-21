@@ -62,7 +62,7 @@ public:
 	glm::vec3 objColour;
 
 	bool bUseVertexColour;		// = false (default)
-
+	bool bIsInteractable;
 	bool bDontLight;		// If true, just object colour is used
 
 	// Child objects inside this one

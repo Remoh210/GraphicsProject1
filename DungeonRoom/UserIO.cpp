@@ -17,10 +17,13 @@ extern cLightManager* LightManager;
 int lightIndex = 0;
 bool firstMouse = true;
 
+bool bIsPicked = false;
 cMeshObject* closedModel;
 
 bool IsPicked = false;
 cMeshObject* CloseToObj(std::vector<cMeshObject*> models);
+
+cMeshObject* cloesetObj;
 
 void key_callback( GLFWwindow* window, 
 						  int key, 
@@ -28,7 +31,7 @@ void key_callback( GLFWwindow* window,
 						  int action, 
 						  int mods)
 {
-
+	cMeshObject* Skull = findObjectByFriendlyName("skull");
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
         glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -116,6 +119,19 @@ void key_callback( GLFWwindow* window,
 
 
 	
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		float dist = glm::distance(Skull->position, g_CameraEye);
+		if (dist < 80.0f)
+		{
+			bIsPicked = !bIsPicked;
+
+		}
+
+
+		//LightManager->vecLights.at(lightIndex)->AtenSphere = false;
+	}
+
 
 	return;
 }
@@ -194,6 +210,8 @@ bool AreAllModifiersUp(GLFWwindow* window)
 
 void ProcessAsynKeys(GLFWwindow* window)
 {
+	cMeshObject* Skull = findObjectByFriendlyName("skull");
+	cMeshObject* ChestTop = findObjectByFriendlyName("chest_top");
 	const float CAMERA_SPEED_SLOW = 5.0f;
 	const float CAMERA_SPEED_FAST = 10.0f;
 
@@ -241,6 +259,28 @@ void ProcessAsynKeys(GLFWwindow* window)
 		if ( glfwGetKey( window, GLFW_KEY_E ) == GLFW_PRESS )	// "down"
 		{	
 			g_CameraEye.y -= cameraSpeed;
+		}
+
+
+		if (bIsPicked)
+		{
+			//cMeshObject* shootSphere = findObjectByFriendlyName("shootBall");
+			Skull->position = g_CameraEye + glm::vec3(0.0f, -20.0f, -60.0f);
+			//shootSphere->velocity = Front * 600.0f;
+			//shootSphere->bIsUpdatedByPhysics = true;
+			//shootSphere->bIsVisible = true;
+			//cloesetObj->position = Front;
+			//bIsPicked = false;
+		}
+		
+		if (glm::distance((glm::vec3)LightManager->vecLights.at(6)->position, Skull->position) < 200.0f && !bIsPicked)
+		{
+			if (ChestTop->postRotation.z < glm::radians(90.0f))
+			{
+				ChestTop->postRotation.z += 0.004f;
+				LightManager->vecLights.at(5)->param2.x = 1.0f;
+			}
+
 		}
 
 	}//if(AreAllModifiersUp(window)
@@ -325,11 +365,12 @@ cMeshObject* CloseToObj(std::vector<cMeshObject*> models)
 		float distance = glm::distance(CurModel->position, g_CameraEye);
 		//std::cout << distance << std::endl;
 		//glm::vec3 pos = CurModel->position;
-		if (distance < 80.0f)
+		if (CurModel->bIsInteractable &&  distance < 250.0f )
 		{
 			std::cout << CurModel->meshName << std::endl;
 			return CurModel;
 		}
+		else { return nullptr; }
 		//else { std::cout << "nothing" << std::endl; }
 	}
 	//return false;

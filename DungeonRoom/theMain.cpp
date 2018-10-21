@@ -253,6 +253,8 @@ int main(void)
 	cLightHelper* pLightHelper = new cLightHelper();
 
 	
+	loadModels("ModelsDef.txt", vec_pObjectsToDraw);
+	loadLights("lightsDef.txt", LightManager->vecLights);
 	//Reload from the file
 	//loadModels("Models.txt", vec_pObjectsToDraw);
 	//*****************************************************************
